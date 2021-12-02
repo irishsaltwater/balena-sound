@@ -1,41 +1,19 @@
 ![logo](https://raw.githubusercontent.com/balena-io-projects/balena-sound/master/docs/images/balenaSound-logo.png)
 
-**Starter project enabling you to add multi-room audio streaming via Bluetooth, Airplay, Spotify Connect and others to any old speakers or Hi-Fi using just a Raspberry Pi.**
+Fork of balenaSound with a plugin for streaming [ChristmasFM](https://christmasfm.com/).
 
-## Highlights
+This plugin launches a Flask server running on port 3500 which accepts commands for turning the stream on/off, and adjusting the volume. It is located under `plugins\cfm`.
+## Usage
+There are three commands accepted by the server. GET requests are used in all cases for ease of use (lets you control this from a browser)
 
-- **Audio source plugins**: Stream audio from your favourite music services: Bluetooth, Airplay, Spotify Connect, UPnP and more!
-- **Multi-room synchronous playing**: Play perfectly synchronized audio on multiple devices all over your place.
-- **Extended DAC support**: Upgrade your audio quality with one of our supported DACs
+- `(YOUR_IP):3500/cfm/volup` - Increments the volume by 10 (maximum 100)
+- `(YOUR_IP):3500/cfm/voldown` - Decrements the volume by 10 (minimum 0)
+- `(YOUR_IP):3500/cfm/toggle` - Turns the stream on or off
 
-## Setup and configuration
+## Notes
+- You can also use the server `plugins\cfm\cfm_app.py` as a standalone `Python3` server, note the requirements are defined in the `Dockerfile`.
+- This is quickly thrown together, I don't recommend exposing the server to the public internet
+- If you are streaming music via Bluetooth it will not stop if you start ChristmasFM, both sounds will play at once (this is either a bug or a feature depending on your musical taste)
 
-Running this project is as simple as deploying it to a balenaCloud application. You can do it in just one click by using the button below:
-
-[![deploy button](https://balena.io/deploy.svg)](https://dashboard.balena-cloud.com/deploy?repoUrl=https://github.com/balenalabs/balena-sound&defaultDeviceType=raspberry-pi)
-
-## Documentation
-
-Head over to our [docs](https://sound.balenalabs.io/docs/) for detailed installation and usage instructions, customization options and more!
-
-## Motivation
-
-![concept](https://raw.githubusercontent.com/balenalabs/balena-sound/master/docs/images/sound.png)
-
-There are many commercial solutions out there that provide functionality similar to balenaSound. Most of them though come with a premium price tag and are riddled with privacy concerns.
-
-balenaSound is an open source project that allows you to build your own DIY audio streaming platform without compromises. Why spend big money on hardware that might be deemed obsolete by the vendor as they see fit? With balenaSound you are in control, bring your old speakers back to life!
-
-This project is in active development so if you have any feature requests or issues please submit them here on GitHub. PRs are welcome, too.
-
-## Getting Help
-
-If you're having any problem, please [raise an issue](https://github.com/balenalabs/balena-sound/issues/new) on GitHub and we will be happy to help.
-
-## Contributing
-
-Do you want to help make balenaSound better? Take a look at our [Contributing Guide](https://sound.balenalabs.io/contributing). Hope to see you around!
-
-## License
-
-balenaSound is free software, and may be redistributed under the terms specified in the [license](https://github.com/balenalabs/balena-sound/blob/master/LICENSE).
+## Further Reading
+Have a look at the full [readme](https://github.com/balenalabs/balena-sound) for more details.

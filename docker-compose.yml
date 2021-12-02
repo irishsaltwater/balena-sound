@@ -18,7 +18,7 @@ services:
       - 4317:4317
 
   sound-supervisor:
-    build: 
+    build:
       context: .
       dockerfile: ./core/sound-supervisor/Dockerfile.template
     network_mode: host
@@ -76,3 +76,11 @@ services:
     network_mode: host
     volumes:
       - spotifycache:/var/cache/raspotify
+
+  cfm:
+    build: ./plugins/cfm
+    restart: on-failure
+    privileged: true
+    network_mode: host
+    ports:
+      - 5000:5000
